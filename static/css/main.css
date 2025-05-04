@@ -1,17 +1,17 @@
-body {
-    padding-bottom: 550px;
+  body {
+    padding-bottom: 50px;
   }
 
 
-label {
+  label {
   font-variant: small-caps;
-}
+  }
 
-.form-check {
+  .form-check {
   display: inline-block;
   font-weight: normal;
   margin: 0 1rem;
-}
+  }
 
     
   footer {
