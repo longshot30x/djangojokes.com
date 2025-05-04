@@ -49,9 +49,7 @@ INSTALLED_APPS = [
     'jokes.apps.JokesConfig',
     'pages.apps.PagesConfig',
     'users.apps.UsersConfig'
-
-    
-
+  
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -156,3 +154,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if os.environ.get('ENVIRONMENT') != 'production':
     from .local_settings import *
 # DON'T PUT ANYTHING BELOW THIS
+
