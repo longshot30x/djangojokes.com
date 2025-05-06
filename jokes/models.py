@@ -1,14 +1,12 @@
 from django.db import models
 from django.urls import reverse
 from common.utils.text import unique_slug
-from django.utils import timezone
-
 
 
 class Joke(models.Model):
     question = models.TextField(max_length=200)
     answer = models.TextField(max_length=100, blank=True)
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True
+    category = models.ForeignKey('Category', on_delete=models.PROTECT,
     )
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
@@ -32,7 +30,8 @@ class Joke(models.Model):
 
 class Category(models.Model):
     category = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True, null=True, editable=False)
+    slug = models.SlugField(max_length=50, unique=True, null=True, editable=False
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -47,3 +46,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
+    
+class Meta:
+    verbose_name_plural = 'Categories'
