@@ -6,7 +6,7 @@ from common.utils.text import unique_slug
 class Joke(models.Model):
     question = models.TextField(max_length=200)
     answer = models.TextField(max_length=100, blank=True)
-    category = models.ForeignKey('Category', on_delete=models.PROTECT
+    category = models.ForeignKey('Category', on_delete=models.CASCADE
     )
     tags = models.ManyToManyField('Tag')
     slug = models.SlugField(
@@ -38,6 +38,7 @@ class Category(models.Model):
     updated = models.DateTimeField(auto_now=True)
     class Meta:
      verbose_name_plural = 'Categories'
+     ordering = ['category']
      
 
     def get_absolute_url(self):
@@ -62,6 +63,9 @@ class Tag(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+     ordering = ['tag']
 
     def get_absolute_url(self):
         return reverse('jokes:tag', args=[self.slug])
@@ -75,5 +79,3 @@ class Tag(models.Model):
     def __str__(self):
         return self.tag
     
-class Meta:
-    ordering = ['tag']
