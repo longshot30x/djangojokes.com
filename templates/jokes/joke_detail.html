@@ -10,9 +10,9 @@
     </div>
     <div class="card-footer">
       <div class="border-bottom border-faded pb-2">
-        <strong>Category:</strong> {{ joke.category }}<br>
+        <strong>Category:</strong> {{ joke.category.category }}<br>
         {% for tag in joke.tags.all %}
-          <span class="badge rounded-pill bg-secondary">{{ tag }}</span>
+          <span class="badge rounded-pill bg-secondary">{{ tag.tag }}</span>
         {% endfor %}
       </div>
       <div class="border-bottom border-faded m-2 pb-2">
