@@ -1,7 +1,6 @@
 from datetime import datetime
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.validators import URLValidator
 
 from .models import Applicant 
 
@@ -23,13 +22,13 @@ class JobApplicationForm(forms.ModelForm):
     available_days = forms.TypedMultipleChoiceField(
         choices=DAYS,
         coerce=int,
-        help_text='Check all days that you can work',
-        widget=forms.CheckboxSelectMultiple(
+        help_text = 'Check all days that you can work',
+        widget = forms.CheckboxSelectMultiple(
             attrs={'checked':True}
         )
     )
     
-    confirmation=forms.BooleanField(
+    confirmation = forms.BooleanField(
         label='I certify that the information I have provided is true.',
         validators=[validate_checked]
     )
@@ -58,7 +57,7 @@ class JobApplicationForm(forms.ModelForm):
             ),
             'cover_letter': forms.Textarea(attrs={'cols': '100', 'rows': '5'})
         }
-    error_messages = {
+        error_messages = {
             'start_date': {
                 'past_date': 'Please enter a future date.'
             }
