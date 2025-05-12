@@ -21,32 +21,33 @@ class JobApplicationForm(forms.ModelForm):
     )
     
     available_days = forms.TypedMultipleChoiceField(
-        choice=DAYS,
+        choices=DAYS,
         coerce=int,
-        help_text = 'Check all days that you can work',
-        widget = forms.CheckboxSelectMultiple(
-            attrs = {'checked':True}
+        help_text='Check all days that you can work',
+        widget=forms.CheckboxSelectMultiple(
+            attrs={'checked':True}
         )
     )
     
-    confirmation = forms.BooleanField(
-        label = 'I certify that the information I have provided is true.'
-        validators = [validate_checked]
+    confirmation=forms.BooleanField(
+        label='I certify that the information I have provided is true.',
+        validators=[validate_checked]
     )
         
     
-class meta:
-    model = Applicant
-    fields = ('first_name', 'last_name', 'email', 'website', 'employment_type',
+    class meta:
+        model = Applicant
+        fields = (
+            'first_name', 'last_name', 'email', 'website', 'employment_type',
             'start_date', 'available_days', 'desired_hourly_wage',
             'cover_letter', 'confirmation', 'job')
     
-    widgets = {
-        'first_name': forms.TextInput(attrs={'autofocus': True}),
+        widgets = {
+            'first_name': forms.TextInput(attrs={'autofocus': True}),
             'website': forms.TextInput(
                 attrs = {'placeholder':'https://www.example.com'}
-        ),
-        'start_date': forms.SelectDateWidget(
+            ),
+            'start_date': forms.SelectDateWidget(
                 attrs = {
                     'style': 'width: 31%; display: inline-block; margin: 0 1%'
                 },
@@ -63,5 +64,6 @@ class meta:
             }
         }
         
+
     
     
