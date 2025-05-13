@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from django.core.exceptions import ValidationError
-from django.core.validators import URLValidator
-from django.db import models
+from django.core.exceptions import ValidationError 
+from django.core.validators import URLValidator 
+from django.db import models 
 
 def validate_future_date(value):
     if value < datetime.now().date():
