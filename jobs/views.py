@@ -2,8 +2,7 @@ import html
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
 
-from common.utils.email import send_email
-
+from common.utils.email import send_email  # Ensure this is implemented correctly
 from .models import Applicant 
 from .forms import JobApplicationForm
 
@@ -12,19 +11,26 @@ class JobAppView(CreateView):
     model = Applicant
     form_class = JobApplicationForm
     success_url = reverse_lazy('jobs:thanks')
-    
+
     def form_valid(self, form):
         data = form.cleaned_data
-        to = 'josephfacio@comcast.net'
+        to = 'josephfacio@comcast.net'  # Replace or make configurable in settings
         subject = 'Application for Joke Writer'
-        content = f'''<p>Hey HR Manager!</p>
-            <p>Job application received:</p>
-            <ol>'''
+        content = '''<p>Hey HR Manager!</p><p>Job application received:</p><ol>'''
+
         for key, value in data.items():
             label = key.replace('_', ' ').title()
-            entry = html.escape(str(value), quote=False)
-            content += f'<li>{label}: {entry}</li>'
-        
+            
+            # Clean up values for display
+            if key == 'available_days':
+                entry = ', '.join(str(day) for day in value)
+            elif isinstance(value, bool):
+                entry = 'Yes' if value else 'No'
+            else:
+                entry = html.escape(str(value), quote=False)
+
+            content += f'<li><strong>{label}</strong>: {entry}</li>'
+
         content += '</ol>'
 
         send_email(to, subject, content)
@@ -33,4 +39,3 @@ class JobAppView(CreateView):
 
 class JobAppThanksView(TemplateView):
     template_name = 'jobs/thanks.html'
-
