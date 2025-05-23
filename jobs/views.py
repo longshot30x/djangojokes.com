@@ -1,13 +1,15 @@
 import html
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import FormView, TemplateView
 
 from common.utils.email import send_email
+
 
 from .models import Applicant
 from .forms import JobApplicationForm
 
-class JobAppView(CreateView):
+class JobAppView(FormView):
+    template_name = 'jobs/applicant_form.html'
     model = Applicant
     form_class = JobApplicationForm
     success_url = reverse_lazy('jobs:thanks')
